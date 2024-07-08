@@ -33,7 +33,7 @@ router
     .get(async (req, res) => {
         try {
             const movie = await Movies.findById(req.params.id);
-            if (!movie) return res.status(404).json({message: 'Movie not found'});
+            if (!movie) return res.status(404).json({message: 'Movie does not exist'});
             res.status(200).json(movie);
         } catch (error) {
             res.status(500).json({message: 'Server not responding'});
@@ -42,7 +42,7 @@ router
     .put(async (req, res) => {
         try {
             const updatedMovie = await Movies.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true});
-            if (!updatedMovie) return res.status(404).json({message: 'Movie not found'});
+            if (!updatedMovie) return res.status(404).json({message: 'Movie does not exist'});
             res.status(200).json(updatedMovie);
         } catch (error) {
             res.status(400).json({message: error.message});
